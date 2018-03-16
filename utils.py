@@ -8,11 +8,16 @@
 import os
 
 
-path = 'F:\\DataFun\\DataBase\\Consuption_Data\\Source_Data\\Combined'
+consumption_path = 'F:\\DataFun\\DataBase\\Consumption_Data\\Source_Data\\Combined'
 
 
-class Solution():
+class Solution:
     def change_file_name(self, path):
+        """
+
+        :param path: string
+        :return:
+        """
         file_list = os.listdir(path)
         for file in file_list:
             os.rename(path+'\\'+file,
@@ -20,20 +25,15 @@ class Solution():
         print('Done')
         return None
 
-
     def create_symlink(self, src, dist):
         """
 
-        :param src: string or list
+        :param src: string
         :param dist: string
         :return: None
         """
-        if isinstance(src, str):
-            self._create_string_symlink(src, dist)
-        if isinstance(src, list):
-            for file in src:
-                self._create_string_symlink(file, dist)
-
-    def _create_string_symlink(self, src, dist):
-        pass
-
+        file_list = os.listdir(src)
+        for file in file_list:
+            os.symlink(src+'\\'+file, dist+'\\'+file)
+        print('Done')
+        return None
